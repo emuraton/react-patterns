@@ -1,12 +1,11 @@
 import React from 'react';
-import './App.css';
 
 import Counter from './compound-components/Counter';
 const MIN_VALUE = 0;
 const MAX_VALUE = 20;
 
 function App() {
-  const [quantity, setQuantity] = React.useState(20);
+  const [quantity, setQuantity] = React.useState(0);
 
   const onIncrement = () => {
     if (quantity === MAX_VALUE) return;
