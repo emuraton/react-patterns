@@ -13,9 +13,21 @@ const Usage = () => {
 
   return (
     <Context.Provider value={{ themeColor, updateThemeColor }}>
-      <ThemedButton>Btn</ThemedButton>
+      <Card>
+        <List>
+          <ThemedButton>Btn</ThemedButton>
+        </List>
+      </Card>
     </Context.Provider>
   );
+};
+
+const Card = ({ children }) => {
+  <div>{children}</div>;
+};
+
+const List = ({ children }) => {
+  <ul>{children}</ul>;
 };
 
 export default Usage;
