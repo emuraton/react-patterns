@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   background-color: ${({ isDisabled }) =>
-    isDisabled ? 'rgb(242, 243, 245)' : 'rgb(0, 112, 246)'};
+    isDisabled ? 'rgb(242, 243, 245)' : 'rgb(0, 156, 246)'};
   border-radius: 5px;
   border: 0;
-  color: white;
+  color: ${({ themeColor }) => (themeColor === `primary` ? `white` : `black`)};
   width: 40px;
   height: 40px;
   &:hover {
