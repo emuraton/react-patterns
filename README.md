@@ -7,12 +7,15 @@ Let's imagine we have an `App` component that fetches data items. Lower on the t
 
 ![App example](./public/app-example.png)
 
-Then we would need to pass down data items, useful only to `ListItem`, to multiple layers that don't need them.
-
+Then we would need to pass down data items, useful only to `ListItem`, to multiple layers that don't need them. The bigger the application, the harder it can become to maintain and refactor.  
 The **Provider Pattern** solves this problem by enabling us to store data in a globalized state, _React Context_, and directly share it to a selected component.
 
-Here is a real code example:
-First let's define a React Context, this will serve us to save our global data.
+Let's do a real code example.
+
+> All the source code is accessible on:
+> https://github.com/emuraton/react-patterns/tree/main/src/patterns/provider
+
+First, let's define a React Context, this will serve us to save our global data.
 
 ```jsx
 import * as React from 'react';
@@ -41,7 +44,7 @@ const ThemedButton = ({ children }) => {
 export default ThemedButton;
 ```
 
-Now, we can use our `ThemedButton`. We don't need anymore to manually pass down props through each layer.
+Now, we can use our Context and `ThemedButton`. The React Provider uses a `value` prop, which is the data that we want to pass down.
 
 ```jsx
 import ThemedButton from './ThemedButton';
@@ -67,3 +70,6 @@ const Usage = () => {
   );
 };
 ```
+
+We don't need anymore to manually pass down props through each layer.  
+Most common use case for the Provider are theming, i18n, authentication and logging.
