@@ -229,7 +229,11 @@ const WithHooks = () => {
 ```
 
 Now let's compare the result in the devtools.
-![With render props](./public/with-renderProps.png)
-![With custom hooks](./public/with-customHooks.png)
+![With render props](./public/with-renderProps.png) | ![With custom hooks](./public/with-customHooks.png)
 
 As you can see, the second one with custom hooks is far more readable and concise.
+
+<p>
+<img src="./public/with-renderProps.png" width="40%">
+<img src="./public/with-customHooks.png" width="40%">
+</p>
