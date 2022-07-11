@@ -4,6 +4,7 @@
 
 - [Provider Pattern](#providerpattern)
 - [Compound Components Pattern](#compoundpattern)
+- [Custom hooks Pattern](#customhookspattern)
 
 ## <a name="providerpattern">Provider Pattern</a>
 
@@ -49,7 +50,7 @@ const ThemedButton = ({ children }) => {
 export default ThemedButton;
 ```
 
-Now, we can use our `Context` and `ThemedButton`. The react provider uses a `value` prop, which is the data that we want to pass down.
+Now, we can use our `Context` and `ThemedButton`. The react provider uses a `value` prop, which is the data we want to pass down.
 
 ```jsx
 import ThemedButton from './ThemedButton';
@@ -76,7 +77,7 @@ const Usage = () => {
 };
 ```
 
-We don't need anymore to manually pass down props through each layer.  
+We don't need anymore to pass down props through each layer manually.  
 Some of the most common use cases for the provider pattern are theming, i18n, authentication and logging.
 
 ## <a name="compoundpattern">Compound Coponents Pattern</a>
@@ -130,4 +131,16 @@ const Usage = () => {
 };
 ```
 
-This component has great UI flexibility, this is extremly powerful when you want to implement multiples variants of a component. For example, the user can change the SubComponents’ order or define which one should be displayed.
+This component has great UI flexibility and is extremely powerful when you want to implement multiple variants of a component. For example, the user can change the SubComponents’ order or define which one should be displayed.
+
+
+## <a name="customhookspattern">Custom hooks Pattern</a>
+
+First thing first; what are hooks?
+From react documentation:
+> "Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class."
+
+But they are also far more because React allows you to build your own hooks.
+If you want more information about hooks, you can dig in https://reactjs.org/docs/hooks-intro.html
+
+Preciously you were probably using `HOC` or `Render props` patterns, which were good patterns but could also be quite painful to use. The most frequent one is the "wrapper hell". Who looked at an application in React devtools and never saw a huge block of wrapper components nested deeply inside each other? This can make debugging and improving perfomance quite difficult. Now, here the cool part, customs hooks let you extract component logic into reusable function.
