@@ -25,7 +25,7 @@ class Hover extends React.Component {
 }
 
 const Wrapper = styled.div`
-  width: 20%;
+  /* width: 20%; */
 `;
 
 export default Hover;

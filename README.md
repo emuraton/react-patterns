@@ -176,7 +176,7 @@ class Hover extends React.Component {
 }
 
 const Wrapper = styled.div`
-  width: 20%;
+  // some css
 `;
 ```
 
@@ -229,7 +229,10 @@ const WithHooks = () => {
 ```
 
 Now let's compare the result in the devtools.
-![With render props](./public/with-renderProps.png)
-![With custom hooks](./public/with-customHooks.png)
+
+<p align="center">
+  <img src="./public/with-renderProps.png" width="40%">
+  <img src="./public/with-customHooks.png" width="40%">
+</p>
 
 As you can see, the second one with custom hooks is far more readable and concise.

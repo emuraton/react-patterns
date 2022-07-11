@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import ProviderPatternUsage from './patterns/provider/Usage';
-import CoumpoundPatternUsage from './patterns/compound-components/Usage';
+// import ProviderPatternUsage from './patterns/provider/Usage';
+// import CoumpoundPatternUsage from './patterns/compound-components/Usage';
 import { WithRenderProps, WithHooks } from './patterns/custom-hooks/Usage';
 
 function App() {
