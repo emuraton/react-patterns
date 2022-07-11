@@ -133,14 +133,103 @@ const Usage = () => {
 
 This component has great UI flexibility and is extremely powerful when you want to implement multiple variants of a component. For example, the user can change the SubComponents’ order or define which one should be displayed.
 
-
 ## <a name="customhookspattern">Custom hooks Pattern</a>
 
 First thing first; what are hooks?
 From react documentation:
-> "Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class."
 
-But they are also far more because React allows you to build your own hooks.
+> Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class.
+
+But they are actually far more, because React allows you to build your own hooks.
 If you want more information about hooks, you can dig in https://reactjs.org/docs/hooks-intro.html
 
-Preciously you were probably using `HOC` or `Render props` patterns, which were good patterns but could also be quite painful to use. The most frequent one is the "wrapper hell". Who looked at an application in React devtools and never saw a huge block of wrapper components nested deeply inside each other? This can make debugging and improving perfomance quite difficult. Now, here the cool part, customs hooks let you extract component logic into reusable function.
+Preciously you were probably using `HOC` or `Render props` patterns, which were good patterns, but could also be frequently quite frustrating to use. The most common issue is the "wrapper hell" (nesting of non rendering component).
+Have you ever looked at your devtools and seen a component wrapped in a huge block of HOC / render props components? Most likely yes. This make debugging, testing and improving perfomance quite difficult.
+But, here the cool part, as `Render props` / `HOC` patterns and `Custom hooks` both allow you to extract component's logic into reusable function, you can replace these pattern by custom hooks.
+
+To make it simpler to understand, let's write the same functionality both with a render props and a custom hook. For instance, a simple onHover logic.
+
+With `Render props`, we need to create a component that will handle this logic for its children.
+
+```jsx
+class Hover extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hovered: false,
+    };
+  }
+
+  handleMouseOver = () => this.setState({ hovered: true });
+  handleMouseOut = () => this.setState({ hovered: false });
+
+  render() {
+    return (
+      <Wrapper
+        onMouseOver={this.handleMouseOver}
+        onMouseOut={this.handleMouseOut}
+      >
+        {this.props.render(this.state)}
+      </Wrapper>
+    );
+  }
+}
+
+const Wrapper = styled.div`
+  width: 20%;
+`;
+```
+
+And then wrap our UI component, with `Hover`.
+
+```jsx
+const WithRenderProps = () => (
+  <Hover
+    render={({ hovered }) => <Button hovered={hovered}>Im a button</Button>}
+  />
+);
+```
+
+With the `Custom hooks` pattern, we will create a separate function that will handle the logic and then use it directly into our UI component.
+
+```jsx
+const useHover = () => {
+  const [hovered, setHovered] = useState(false);
+  const ref = useRef(null);
+
+  const handleMouseOver = () => setHovered(true);
+  const handleMouseOut = () => setHovered(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (node) {
+      node.addEventListener('mouseover', handleMouseOver);
+      node.addEventListener('mouseout', handleMouseOut);
+      return () => {
+        node.removeEventListener('mouseover', handleMouseOver);
+        node.removeEventListener('mouseout', handleMouseOut);
+      };
+    }
+  }, [ref.current]);
+
+  return [ref, hovered];
+};
+```
+
+```jsx
+const WithHooks = () => {
+  const [btnRef, hovered] = useHover();
+
+  return (
+    <Button ref={btnRef} hovered={hovered}>
+      Im a button
+    </Button>
+  );
+};
+```
+
+Now let's compare the result in the devtools.
+![With render props](./public/with-renderProps.png)
+![With custom hooks](./public/with-customHooks.png)
+
+As you can see, the second one with custom hooks is far more readable and concise.

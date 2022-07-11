@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 
 class Hover extends React.Component {
   constructor(props) {
@@ -8,16 +9,23 @@ class Hover extends React.Component {
     };
   }
 
-  handleMouseOver = () => this.setState(true);
-  handleMouseOut = () => this.setState(false);
+  handleMouseOver = () => this.setState({ hovered: true });
+  handleMouseOut = () => this.setState({ hovered: false });
 
   render() {
     return (
-      <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+      <Wrapper
+        onMouseOver={this.handleMouseOver}
+        onMouseOut={this.handleMouseOut}
+      >
         {this.props.render(this.state)}
-      </div>
+      </Wrapper>
     );
   }
 }
+
+const Wrapper = styled.div`
+  width: 20%;
+`;
 
 export default Hover;

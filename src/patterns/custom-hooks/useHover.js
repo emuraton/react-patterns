@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const useHover = () => {
   const [hovered, setHovered] = useState(false);

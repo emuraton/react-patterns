@@ -11,6 +11,7 @@ export const WithRenderProps = () => (
   />
 );
 
+//with custom hooks
 export const WithHooks = () => {
   const [btnRef, hovered] = useHover();
 
@@ -22,5 +23,6 @@ export const WithHooks = () => {
 };
 
 const Button = styled.button`
-  color: ${({ hovered }) => (hovered ? `blue` : `transparent`)};
+  background: ${({ hovered }) => (hovered ? `lightblue` : `white`)};
+  width: 100%;
 `;
